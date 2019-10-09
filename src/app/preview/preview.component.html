@@ -1,0 +1,326 @@
+<div class="main-container">
+
+  <ng-container *ngFor="let payslip of payslips;let i=index">
+    <div class="card">
+      <div class="controls">
+        <h2>{{payslip.EmployeeName}} ({{payslip.EmployeeID}})</h2>
+        <!--<button (click)="download(i)">Download PDF</button>-->
+      </div>
+      <div class="container">
+        <div class="payslip-container">
+          <div class="payslip-header">
+            <div class="logo"
+                 [style.width]="payslip.isParentCompany ? '45px':'85px'"
+                 [style.background-color]="payslip.isParentCompany ? '':'black'"
+                 [style.padding]="payslip.isParentCompany ? '0px':'10px'">
+              <img [src]="payslip.company.logo" />
+            </div>
+            <div class="company-detail">
+              <h1 [style.color]="payslip.isParentCompany ? '#eb6b10':'#016e6e'">{{payslip.company.displayName}}</h1>
+              <p>{{payslip.company.address}}</p>
+              <p>Mobile : {{payslip.company.mobileNo}}</p>
+            </div>
+          </div>
+          <div class="payslip-sub-header">
+            <p>Salary Slip {{payslip.SalarySlip}}</p>
+          </div>
+          <div class="payslip-body">
+            <table>
+              <tr>
+                <td colspan="4"></td>
+              </tr>
+              <tr>
+                <td>Employee Name:</td>
+                <td class="underline"><strong>{{payslip.EmployeeName}}</strong></td>
+                <td>
+                  Pay Period Begin Date:
+                </td>
+                <td>
+                  {{payslip.PayPeriodBeginDate}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Employee Address:
+                </td>
+                <td>
+                  <p>
+                    <strong>
+                      {{payslip.EmployeeAddress}}
+                    </strong>
+                  </p>
+                </td>
+                <td>
+                  Pay Period End Date:
+                </td>
+                <td>
+                  {{payslip.PayPeriodEndDate}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Employee ID:
+                </td>
+                <td>
+                  {{payslip.EmployeeID}}
+                </td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td colspan="2" class="td-title">
+                  <strong>Earnings</strong>
+                </td>
+                <td colspan="2" class="td-title">
+                  <strong>Deductions</strong>
+                </td>
+              </tr>
+              <tr>
+                <td class="td-row">
+                  Basic
+                </td>
+                <td class="td-row-val">
+                  {{payslip.Basic}}
+                </td>
+                <td class="td-row">
+                  Professional Tax
+                </td>
+                <td class="td-row-val">
+                  {{payslip.ProfessionalTax}}
+                </td>
+              </tr>
+              <tr>
+                <td class="td-row">
+                  HRA
+                </td>
+                <td class="td-row-val">
+                  {{payslip.HRA}}
+                </td>
+                <td class="td-row">
+                  Tax Deduct at Source(TDS)
+                </td>
+                <td class="td-row-val">
+                  {{payslip.TDS}}
+                </td>
+              </tr>
+              <tr>
+                <td class="td-row">
+                  Medical
+                </td>
+                <td class="td-row-val">
+                  {{payslip.Medical}}
+                </td>
+                <td class="td-row">
+                  Employee's Contribution to PF
+                </td>
+                <td class="td-row-val">
+                  {{payslip.EmployeesContributiontoPF}}
+                </td>
+              </tr>
+              <tr>
+                <td class="td-row">
+                  Conveyance
+                </td>
+                <td class="td-row-val">
+                  {{payslip.Conveyance}}
+                </td>
+                <td class="td-row">
+                  {{payslip.EmployeesContributiontoESIC ? 'Employee ESIC Contribution' :''}}
+                </td>
+                <td class="td-row-val">
+                  {{payslip.EmployeesContributiontoESIC ? payslip.EmployeesContributiontoESIC :''}}
+                </td>
+              </tr>
+              <tr>
+                <td class="td-row">
+                  Other Allowance
+                </td>
+                <td class="td-row-val">
+                  {{payslip.OtherAllowance}}
+                </td>
+                <td class="td-row">{{payslip.Advance ? 'Advance':''}}</td>
+                <td class="td-row-val">{{payslip.Advance ? payslip.Advance:''}}</td>
+              </tr>
+              <tr *ngIf="payslip.PNL">
+                <td class="td-row" colspan="2">
+                </td>
+                <td class="td-row">Late punch <b>({{payslip.PNLD}} day)</b></td>
+                <td class="td-row-val">{{payslip.PNL ? payslip.PNL:''}}</td>
+              </tr>
+              <tr *ngIf="payslip.LWP">
+                <td class="td-row" colspan="2"></td>
+                <td class="td-row">
+                  {{payslip.LWP ? 'Leave Without Pay (LWP)':''}}
+                </td>
+                <td class="td-row-val">{{payslip.LWP ? payslip.LWP : ''}}</td>
+              </tr>
+              <tr>
+                <td class="td-row">
+                  Total Earnings
+                </td>
+                <td class="td-row-val">
+                  {{payslip.TotalEarnings}}
+                </td>
+                <td class="td-row">
+                  Total Deduction
+                </td>
+                <td class="td-row-val">
+                  {{payslip.TotalDeductions}}
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" class="td-title">
+                  <strong>
+                    Employer's Contribution
+                  </strong>
+                </td>
+                <td colspan="2" class="td-title">
+                  <strong>
+                    PAY SUMMARY
+                  </strong>
+                </td>
+              </tr>
+              <tr>
+                <td class="td-row">
+                  Employer's PF Contribution
+                </td>
+                <td class="td-row-val">
+                  {{payslip.EmployersPFContribution}}
+                </td>
+                <td class="td-row">
+                  Total Gross
+                </td>
+                <td class="td-row-val">
+                  {{payslip.TotalGross}}
+                </td>
+              </tr>
+              <tr>
+                <td class="td-row">
+                  Employer's ESIC Contribution
+                </td>
+                <td class="td-row-val">
+                  {{payslip.EmployersESICContribution}}
+                </td>
+                <td class="td-row">
+                  Less: Tax
+                </td>
+                <td class="td-row-val">
+                  {{payslip.LessTax}}
+                </td>
+              </tr>
+              <tr>
+                <td class="td-row"></td>
+                <td class="td-row-val"></td>
+                <td class="td-row">
+                  Less: Deductions
+                </td>
+                <td class="td-row-val">
+                  {{payslip.LessDeductions}}
+                </td>
+              </tr>
+              <tr>
+                <td class="td-row"></td>
+                <td class="td-row-val"></td>
+                <td class="td-row">
+                  Net Pay
+                </td>
+                <td class="td-row-val">
+                  <strong>{{payslip.NetPay}}</strong>
+                </td>
+              </tr>
+              <ng-container *ngIf="!payslip.isEmpOnProbation">
+                <tr>
+                  <td colspan="3"></td>
+                  <td class="border-none right"></td>
+                </tr>
+                <tr>
+                  <td colspan="3" class="td-title center">
+                    <strong>
+                      Leave Records
+                    </strong>
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td class="td-row center">
+                    <strong>Leave Type</strong>
+                  </td>
+                  <td class="td-row center">
+                    <strong>Utilised Leave</strong>
+                  </td>
+                  <td class="td-row center">
+                    <strong>Balance Leave</strong>
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td class="td-row center">
+                    <strong>
+                      CL
+                    </strong>
+                  </td>
+                  <td class="td-row center">
+                    {{payslip.CLU}}
+                  </td>
+                  <td class="td-row center">
+                    <strong>
+                      {{payslip.CLB}}
+                    </strong>
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td class="td-row center">
+                    <strong>
+                      SL
+                    </strong>
+                  </td>
+                  <td class="td-row center">
+                    {{payslip.SLU}}
+                  </td>
+                  <td class="td-row center">
+                    <strong>
+                      {{payslip.SLB}}
+                    </strong>
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td class="td-row center">
+                    <strong>
+                      2 Hours
+                    </strong>
+                  </td>
+                  <td class="td-row center">
+                    {{payslip.HLU}}
+                  </td>
+                  <td class="td-row center"></td>
+                  <td></td>
+                </tr>
+              </ng-container>
+              <tr>
+                <td colspan="4">
+                  <b>***Note:</b> 2 times leaves taken for 2 hours will be considered as half day and 4 times will be considered as 1 full day.
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" class="center">
+                  Employee Signature:
+                </td>
+                <td class="right">
+                  Director Signature:
+                </td>
+                <td class="sign">
+                  <div class="sign-container">
+                    <img src="./assets/signatures/dSign.png" />
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+

@@ -1,0 +1,147 @@
+$border: 2px solid black;
+
+input[type='file'] {
+  display: none;
+}
+
+.border-none {
+  border: none;
+}
+
+.right {
+  text-align: right;
+}
+
+.center {
+  text-align: center;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .container-real {
+    padding: 100px;
+    width: 2480px;
+    height: 3508px;
+    font-size: 50px;
+    display: none;
+
+    .payslip-header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      background-color: #bfbfbf;
+      width: inherit;
+      height: 300px;
+      border: $border;
+      padding: 10px;
+
+      .logo {
+        width: 375px;
+        margin-left: 10px;
+        margin-right: 60px;
+
+        img {
+          height: inherit;
+          width: inherit;
+        }
+      }
+
+      .company-detail {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+
+        h1 {
+          font-size: 125px;
+        }
+      }
+    }
+
+    .payslip-sub-header {
+      text-align: center;
+      padding: 35px;
+      border: $border;
+    }
+
+    .payslip-body {
+      width: inherit;
+      height: inherit;
+
+      table {
+        border-collapse: collapse;
+        border: $border;
+        width: 100%;
+
+        td {
+          padding: 18px;
+          width: 200px;
+          word-wrap: break-word;
+        }
+
+        .td-title {
+          border: $border;
+        }
+
+        .td-row {
+          border: 1px solid black;
+        }
+
+        .td-row-val {
+          text-align: right;
+          border: 1px solid black;
+        }
+
+        .sign {
+          display: flex;
+          align-items: center;
+
+          .sign-container {
+            width: 300px;
+            height: 150px;
+            padding: 50px;
+
+            img {
+              height: inherit;
+              width: inherit;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .controls {
+    text-align: center;
+
+    button, label {
+      border-radius: 5px;
+      padding: 10px;
+      border: 2px solid #e3e3e3;
+      background-color: #e2e2e2;
+      margin: 10px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    button:hover {
+      background-color: #ffffff;
+    }
+
+    label:hover {
+      background-color: #ffffff;
+    }
+  }
+
+  #pdfCanvas {
+    display: none;
+  }
+}
